@@ -73,3 +73,8 @@ def test_delete_task_removes_it(client):
 def test_delete_nonexistent_task_returns_404(client):
     response = client.delete("/tasks/999")
     assert response.status_code == 404
+
+
+def test_cors_header_present_for_frontend_origin(client):
+    response = client.get("/tasks", headers={"Origin": "http://localhost:3000"})
+    assert "access-control-allow-origin" in response.headers

@@ -1,5 +1,6 @@
 from typing import Generator
 from fastapi import Depends, FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from sqlalchemy.orm import Session
 
@@ -9,6 +10,13 @@ from repository import TaskRepository
 Base.metadata.create_all(bind=engine)
 
 app = FastAPI(title="TODO API")
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:3000"],
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 
 def get_session() -> Generator[Session, None, None]:
