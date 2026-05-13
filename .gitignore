@@ -6,7 +6,7 @@ backend/tasks.db
 backend/.pytest_cache/
 
 # Node
-frontend/node_modules/
+node_modules/
 frontend/.next/
 
 # OS
