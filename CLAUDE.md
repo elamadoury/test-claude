@@ -29,3 +29,17 @@ cd frontend && pnpm build                  # production build
 - Frontend fetches from `http://localhost:8000` via `src/lib/apiClient.ts`
 - Database: SQLite file at `backend/tasks.db` (created on startup)
 - All DB logic lives in `TaskRepository` — the FastAPI router is a thin delegation layer
+
+## Agent skills
+
+### Issue tracker
+
+Issues live in GitHub Issues (`gh` CLI). See `docs/agents/issue-tracker.md`.
+
+### Triage labels
+
+Default label vocabulary (needs-triage, needs-info, ready-for-agent, ready-for-human, wontfix). See `docs/agents/triage-labels.md`.
+
+### Domain docs
+
+Single-context layout — one `CONTEXT.md` + `docs/adr/` at the repo root. See `docs/agents/domain.md`.
