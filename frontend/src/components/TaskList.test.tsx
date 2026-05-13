@@ -3,6 +3,7 @@ import { describe, it, expect } from "vitest";
 import TaskList from "./TaskList";
 
 const TASK = { id: 1, title: "Buy milk", completed: false, created_at: "2026-01-01T00:00:00" };
+const TASK2 = { id: 2, title: "Walk dog", completed: false, created_at: "2026-01-01T00:00:00" };
 
 describe("TaskList", () => {
   it("renders empty state when given no tasks", () => {
@@ -13,5 +14,13 @@ describe("TaskList", () => {
   it("renders task titles", () => {
     render(<TaskList tasks={[TASK]} onComplete={() => {}} onDelete={() => {}} />);
     expect(screen.getByText("Buy milk")).toBeInTheDocument();
+  });
+
+  it("highlights only the task matching highlightedTaskId", () => {
+    render(<TaskList tasks={[TASK, TASK2]} onComplete={() => {}} onDelete={() => {}} highlightedTaskId={1} />);
+    const highlighted = screen.getByText("Buy milk").closest("div");
+    const notHighlighted = screen.getByText("Walk dog").closest("div");
+    expect(highlighted).toHaveClass("ring-2");
+    expect(notHighlighted).not.toHaveClass("ring-2");
   });
 });

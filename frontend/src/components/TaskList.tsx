@@ -6,9 +6,10 @@ interface Props {
   tasks: Task[];
   onComplete: (id: number) => void;
   onDelete: (id: number) => void;
+  highlightedTaskId?: number | null;
 }
 
-export default function TaskList({ tasks, onComplete, onDelete }: Props) {
+export default function TaskList({ tasks, onComplete, onDelete, highlightedTaskId }: Props) {
   if (tasks.length === 0) {
     return <p className="text-muted-foreground text-sm">No tasks yet. Add one above!</p>;
   }
@@ -16,7 +17,7 @@ export default function TaskList({ tasks, onComplete, onDelete }: Props) {
   return (
     <div className="flex flex-col gap-2">
       {tasks.map((task) => (
-        <TaskItem key={task.id} task={task} onComplete={onComplete} onDelete={onDelete} />
+        <TaskItem key={task.id} task={task} onComplete={onComplete} onDelete={onDelete} highlighted={task.id === highlightedTaskId} />
       ))}
     </div>
   );

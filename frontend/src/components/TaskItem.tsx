@@ -7,11 +7,12 @@ interface Props {
   task: Task;
   onComplete: (id: number) => void;
   onDelete: (id: number) => void;
+  highlighted?: boolean;
 }
 
-export default function TaskItem({ task, onComplete, onDelete }: Props) {
+export default function TaskItem({ task, onComplete, onDelete, highlighted }: Props) {
   return (
-    <div className="flex items-center gap-3 p-3 border rounded-lg">
+    <div className={`flex items-center gap-3 p-3 border rounded-lg ${highlighted ? "ring-2 ring-blue-400 bg-blue-50" : ""}`}>
       <Checkbox
         checked={task.completed}
         onCheckedChange={() => onComplete(task.id)}

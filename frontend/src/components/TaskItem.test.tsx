@@ -24,4 +24,16 @@ describe("TaskItem", () => {
     render(<TaskItem task={DONE_TASK} onComplete={vi.fn()} onDelete={vi.fn()} />);
     expect(screen.getByText("Buy milk")).toHaveClass("line-through");
   });
+
+  it("renders with highlight ring when highlighted", () => {
+    render(<TaskItem task={TASK} onComplete={vi.fn()} onDelete={vi.fn()} highlighted />);
+    const container = screen.getByText("Buy milk").closest("div");
+    expect(container).toHaveClass("ring-2", "ring-blue-400", "bg-blue-50");
+  });
+
+  it("does not render highlight ring when not highlighted", () => {
+    render(<TaskItem task={TASK} onComplete={vi.fn()} onDelete={vi.fn()} />);
+    const container = screen.getByText("Buy milk").closest("div");
+    expect(container).not.toHaveClass("ring-2");
+  });
 });
